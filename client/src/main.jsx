@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Home from './pages/Home'
-import Profile from './pages/Profile'
+import Profile from './pages/Login'
 import Error from './pages/Error'
 
 const router = createBrowserRouter([

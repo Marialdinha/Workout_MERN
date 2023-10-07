@@ -25,9 +25,9 @@ const typeDefs = `
     notes: String
   }
 
-  type Query {
-    me: User
-  }
+  // type Query {
+  //   me: User
+  // }
 
   type Mutation {
     addUser(userName: String!): Auth

@@ -6,7 +6,7 @@ import SkillForm from '../components/SkillForm';
 
 import { QUERY_SINGLE_PROFILE } from '../utils/queries';
 
-const Profile = () => {
+const Login = () => {
   const { profileId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_PROFILE, {
@@ -33,4 +33,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Login;

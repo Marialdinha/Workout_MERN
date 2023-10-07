@@ -2,6 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
+const { authMiddleware } = require('./utils/auth');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -18,6 +19,12 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+
+   // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
+  //  app.use('/graphql', expressMiddleware(server, {
+  //   context: authMiddleware
+  // }));
+  app.use('/graphql', expressMiddleware(server));
   
   // Important for MERN Setup: When our application runs from production, it functions slightly differently than in development
   // In development, we run two servers concurrently that work together
@@ -30,8 +37,6 @@ const startApolloServer = async () => {
     });
   }
   
-  // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
-  app.use('/graphql', expressMiddleware(server));
 
   db.once('open', () => {
     app.listen(PORT, () => {
