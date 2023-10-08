@@ -6,7 +6,7 @@ import ProfileForm from '../components/ProfileForm';
 import { QUERY_USERS } from '../utils/queries';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_PROFILES);
+  const { loading, data } = useQuery(QUERY_USERS);
 
   const profiles = data?.profiles || [];
 
