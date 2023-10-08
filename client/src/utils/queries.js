@@ -2,10 +2,10 @@ import { gql } from '@apollo/client';
 
 export const QUERY_USERS = gql`
   // query allUsers {
-  //   users {
+  //   user {
   //     _id
   //     userName
-  //     email
+  //    
   //   }
   // }
 `;

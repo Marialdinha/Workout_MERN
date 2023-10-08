@@ -19,11 +19,19 @@ const activitySchema = new Schema({
       required: true,
     },
   ],
+  user_id: {
+    type: Schema.Types.ObjectId,
+    references: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }
+  },
   notes: [
     {
       type: String,
       trim: true,
     },
+  
 ]
 });
 
