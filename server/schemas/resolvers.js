@@ -13,6 +13,14 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+
+    activities: async () => {
+      return Activity.find();
+    },
+
+    activity: async (parent, { activityId }) => {
+      return Activity.findOne({ _id: activityId });
+    },
   },
 
   Mutation: {

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
-import { ADD_PROFILE } from '../../utils/mutations';
+import { ADD_USER } from '../../utils/mutations';
 import { QUERY_USERS } from '../../utils/queries';
 
-const ProfileForm = () => {
+const UserForm = () => {
   const [name, setName] = useState('');
 
-  const [addProfile, { error }] = useMutation(ADD_PROFILE, {
+  const [addUser, { error }] = useMutation(ADD_USER, {
     refetchQueries: [
       QUERY_USERS,
       'allProfiles'
@@ -18,9 +18,12 @@ const ProfileForm = () => {
     event.preventDefault();
 
     try {
-      const { data } = await addProfile({
+      const { data } = await addUser({
         variables: { name },
       });
+
+      //*****  maybe I have to remove it ******
+     data;
       
       setName('');
     } catch (err) {
@@ -59,4 +62,4 @@ const ProfileForm = () => {
   );
 };
 
-export default ProfileForm;
+export default UserForm;

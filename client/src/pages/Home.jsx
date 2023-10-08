@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 
-import ProfileList from '../components/ProfileList';
-import ProfileForm from '../components/ProfileForm';
+import UserList from '../components/ProfileList';
+import UserForm from '../components/ProfileForm';
 
 import { QUERY_USERS } from '../utils/queries';
 
@@ -17,14 +17,14 @@ const Home = () => {
           className="col-12 col-md-10 mb-3 p-3"
           style={{ border: '1px dotted #1a1a1a' }}
         >
-          <ProfileForm />
+          <UserForm />
         </div>
 
         <div className="col-12 col-md-10 my-3">
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <ProfileList
+            <UserList
               profiles={profiles}
               title="Here's the current roster of friends..."
             />

@@ -6,15 +6,6 @@ const typeDefs = `
     activities: [Activity]
   }
 
-  type Query {
-    me: User
-  }
-
-  type Auth {
-    token: ID!
-    user: User
-  }
-
   type Activity {
     _id: ID
     name: String
@@ -23,16 +14,22 @@ const typeDefs = `
     notes: String
   }
 
+  type Query {
+    me: User
+    activities: [Activity]!
+    activity(activityId: ID!): Activity
+  }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   input ActivityInput {
     name: String
     duration: String
     date: String
     notes: String
-  }
-
-  type Query {
-    activities: [Activity]!
-    activity(activityId: ID!): activity
   }
 
   type Mutation {
