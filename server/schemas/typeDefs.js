@@ -10,6 +10,11 @@ const typeDefs = `
     me: User
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Activity {
     _id: ID
     name: String
@@ -25,9 +30,10 @@ const typeDefs = `
     notes: String
   }
 
-  // type Query {
-  //   me: User
-  // }
+  type Query {
+    activities: [Activity]!
+    activity(activityId: ID!): activity
+  }
 
   type Mutation {
     addUser(userName: String!): Auth

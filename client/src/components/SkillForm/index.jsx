@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 
 import { ADD_SKILL } from '../../utils/mutations';
 
-const SkillForm = ({ profileId }) => {
+const SkillForm = ({ userId }) => {
   const [skill, setSkill] = useState('');
 
   const [addSkill, { error }] = useMutation(ADD_SKILL);
@@ -13,7 +13,7 @@ const SkillForm = ({ profileId }) => {
 
     try {
       const { data } = await addSkill({
-        variables: { profileId, skill },
+        variables: { userId, skill },
       });
 
       setSkill('');

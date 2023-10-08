@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { Activity } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -37,33 +38,35 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
     addActivity: async (parent, { input }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
+      if (context.addActivity) {
+        const updatedActivity = await Activity.findOneAndUpdate(
+          { _id: context.acivity._id },
           { $addToSet: { savedActivities: input } },
           { new: true, runValidators: true }
         );
-        return updatedUser;
+        return updatedActivity;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
 
     removeActivity: async (parent, { _id }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
+      if (context.activity) {
+        const updateActivity = await Activity.findOneAndUpdate(
+          { _id: context.activity._id },
           { $pull: { savedActivities: { _id } } },
           { new: true }
         );
-        return updatedUser;
+        return updatedAcivities;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
     updateActivity: async (parent, { _id, input }, context) => {
       if (context.user) {
         try {
-          const user = await User.findOne({ _id: context.user._id });
+          const user = await Activity.findOne({ _id: context.removeActivity._id });
           if (!user) {
             throw new AuthenticationError('User not found');
           }  
@@ -77,9 +80,9 @@ const resolvers = {
             ...user.activities[activityIndex],
             ...input,
           };
-          const updatedUser = await user.save();
+          const updatedActivity = await activity.save();
   
-          return updatedUser;
+          return updatedActivity;
         } catch (error) {
           throw new Error(`Error updating activity: ${error.message}`);
         }

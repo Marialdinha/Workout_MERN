@@ -4,16 +4,16 @@ import { useQuery } from '@apollo/client';
 import SkillsList from '../components/SkillsList';
 import SkillForm from '../components/SkillForm';
 
-import { QUERY_SINGLE_PROFILE } from '../utils/queries';
+import { QUERY_SINGLE_USER} from '../utils/queries';
 
 const Login = () => {
-  const { profileId } = useParams();
+  const { userId } = useParams();
 
-  const { loading, data } = useQuery(QUERY_SINGLE_PROFILE, {
-    variables: { profileId: profileId },
+  const { loading, data } = useQuery(QUERY_SINGLE_USER, {
+    variables: { userId: userId },
   });
 
-  const profile = data?.profile || {};
+  const user = data?.profile || {};
 
   if (loading) {
     return <div>Loading...</div>;
@@ -21,13 +21,13 @@ const Login = () => {
   return (
     <div>
       <h2 className="card-header">
-        {profile.name}'s friends have endorsed these skills...
+        {user.userName} friends have endorsed these skills...
       </h2>
 
-      {profile.skills?.length > 0 && <SkillsList skills={profile.skills} />}
+      {user.activities?.length > 0 && <SkillsList skills={user.activities} />}
 
       <div className="my-4 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        <SkillForm profileId={profile._id} />
+        <SkillForm userId={user._id} />
       </div>
     </div>
   );

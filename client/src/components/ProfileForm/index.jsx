@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { ADD_PROFILE } from '../../utils/mutations';
-import { QUERY_PROFILES } from '../../utils/queries';
+import { QUERY_USERS } from '../../utils/queries';
 
 const ProfileForm = () => {
   const [name, setName] = useState('');
 
   const [addProfile, { error }] = useMutation(ADD_PROFILE, {
     refetchQueries: [
-      QUERY_PROFILES,
+      QUERY_USERS,
       'allProfiles'
     ]
   });
